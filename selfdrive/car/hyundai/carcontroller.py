@@ -90,7 +90,7 @@ class CarController():
       self.apply_steer_ang = 0.0
       self.en_spas = 3
       self.mdps11_stat_last = 0
-      self.spas_always = False
+      self.spas_always = True#False
 
   def update(self, enabled, CS, frame, CC, actuators, pcm_cancel_cmd, visual_alert,
              left_lane, right_lane, left_lane_depart, right_lane_depart, set_speed, lead_visible):
@@ -110,7 +110,7 @@ class CarController():
 
     #limitParams.STEER_MAX = int(interp(steerAngleAbs, [0.], [SteerLimitParams.STEER_MAX]))
     limitParams.STEER_DELTA_UP = int(interp(steerAngleAbs, [0., 5., 15.], [2, 3, 4]))
-    limitParams.STEER_DELTA_DOWN = int(interp(steerAngleAbs, [0., 5., 15.], [4, 5, 6]))
+    limitParams.STEER_DELTA_DOWN = int(interp(steerAngleAbs, [0., 5., 15.], [4, 5, 5]))
 
     new_steer = actuators.steer * limitParams.STEER_MAX
     apply_steer = apply_std_steer_torque_limits(new_steer, self.apply_steer_last, CS.out.steeringTorque,
